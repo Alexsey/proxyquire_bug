@@ -1,0 +1,8 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "dependencies": {
+    "better-assert": "^1.0.2",
+    "proxyquire": "^1.7.3"
+  }
+}
