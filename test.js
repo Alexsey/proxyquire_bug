@@ -1,25 +1,25 @@
 'use strict'
 
 let assert = require('better-assert')
-let proxyquire = require('proxyquire')
-
-let foo, fake = {}
+let proxyquire = require('proxyquire').noPreserveCache()
 
 
-foo = proxyquire('./foo.js', {
-	'./bar.js': fake
+let foo = proxyquire('./foo.js', {
+	'./bar.js': {
+		f: {
+			g: () => 'a'
+		},
+		h: () => 'a'
+	}
 })
 
-fake.h = () => 'a'
-fake.f.g = () => 'a'
 assert(foo.bar.h() == 'a')
 assert(foo.bar.f.g() == 'a')
 
 
 
-fake = {}
 foo = proxyquire('./foo.js', {
-	'./bar.js': fake
+	'./bar.js': {}
 })
 
 assert(foo.bar.h() == 'h')
